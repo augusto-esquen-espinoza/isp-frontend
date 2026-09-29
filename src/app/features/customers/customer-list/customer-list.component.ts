@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,7 +30,7 @@ import { SearchFilterComponent } from '../search-filter/search-filter.component'
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss',
 })
-export class CustomerListComponent implements OnInit, AfterViewInit {
+export class CustomerListComponent implements OnInit {
   private readonly customerService = inject(CustomerService);
 
   readonly displayedColumns = [
@@ -46,16 +46,20 @@ export class CustomerListComponent implements OnInit, AfterViewInit {
   loading = false;
   errorMessage: string | null = null;
 
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-  @ViewChild(MatSort) sort?: MatSort;
+  // The paginator/sort are rendered conditionally, so bind them through setters
+  // to make sure they are attached as soon as the view creates them.
+  @ViewChild(MatPaginator)
+  set paginator(paginator: MatPaginator | undefined) {
+    this.dataSource.paginator = paginator ?? null;
+  }
+
+  @ViewChild(MatSort)
+  set sort(sort: MatSort | undefined) {
+    this.dataSource.sort = sort ?? null;
+  }
 
   ngOnInit(): void {
     this.load();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator ?? null;
-    this.dataSource.sort = this.sort ?? null;
   }
 
   onFilter(filters: CustomerFilters): void {

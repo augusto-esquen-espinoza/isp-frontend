@@ -3,13 +3,28 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
   }
 
+  // The projected search filter fills the available row and stays at the top-left.
+  app-search-filter {
+    display: block;
+    flex: 1 1 480px;
+    min-width: 0;
+  }
+
+  // Keep the action button pinned to the top-right, aligned with the filter.
   &__new {
+    align-self: flex-start;
+    flex: 0 0 auto;
     height: 56px;
+  }
+
+  // Separate the subtitle from the content below.
+  mat-card-subtitle {
+    margin-bottom: 1rem;
   }
 
   &__state {
