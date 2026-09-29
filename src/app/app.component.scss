@@ -1,0 +1,32 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__logo {
+    margin-right: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+
+  &__spacer {
+    flex: 1 1 auto;
+  }
+
+  &__nav a {
+    margin-left: 0.25rem;
+
+    &.is-active {
+      background-color: rgba(255, 255, 255, 0.18);
+    }
+  }
+}
+
+.app-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}

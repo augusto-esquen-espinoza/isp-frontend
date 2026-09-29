@@ -1,0 +1,72 @@
+<mat-card appearance="outlined" class="customer-form">
+  <mat-card-header>
+    <mat-card-title>Nuevo cliente</mat-card-title>
+    <mat-card-subtitle>Registra un cliente con sus datos personales</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="customer-form__form">
+      <div class="customer-form__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" autocomplete="given-name" />
+          <mat-error *ngIf="form.controls.nombre.hasError('required')">El nombre es obligatorio</mat-error>
+          <mat-error *ngIf="form.controls.nombre.hasError('maxlength')">
+            Máximo 100 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" autocomplete="family-name" />
+          <mat-error *ngIf="form.controls.apellido.hasError('required')">
+            El apellido es obligatorio
+          </mat-error>
+          <mat-error *ngIf="form.controls.apellido.hasError('maxlength')">
+            Máximo 100 caracteres
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="customer-form__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" autocomplete="email" />
+          <mat-error *ngIf="form.controls.email.hasError('required')">El email es obligatorio</mat-error>
+          <mat-error *ngIf="form.controls.email.hasError('email')">Ingresa un email válido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni" inputmode="numeric" maxlength="8" />
+          <mat-error *ngIf="form.controls.dni.hasError('required')">El DNI es obligatorio</mat-error>
+          <mat-error *ngIf="form.controls.dni.hasError('pattern')">
+            El DNI debe tener 8 dígitos
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="customer-form__date">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" [max]="maxBirthDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+        <mat-error *ngIf="form.controls.fechaNacimiento.hasError('required')">
+          La fecha de nacimiento es obligatoria
+        </mat-error>
+      </mat-form-field>
+
+      <p class="customer-form__error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <div class="customer-form__actions">
+        <a mat-stroked-button routerLink="/customers">Cancelar</a>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="submitting">
+          <mat-spinner *ngIf="submitting" diameter="18" class="customer-form__spinner"></mat-spinner>
+          <mat-icon *ngIf="!submitting">save</mat-icon>
+          {{ submitting ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

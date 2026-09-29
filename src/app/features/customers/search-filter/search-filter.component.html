@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="onSearch()" class="search-filter">
+  <mat-form-field appearance="outline" class="search-filter__type">
+    <mat-label>Buscar por</mat-label>
+    <mat-select formControlName="searchType">
+      <mat-option value="dni">DNI</mat-option>
+      <mat-option value="email">Email</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="search-filter__value">
+    <mat-label>{{ valueLabel }}</mat-label>
+    <input matInput formControlName="searchValue" [attr.aria-label]="'Buscar por ' + valueLabel" />
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit" class="search-filter__action">
+    <mat-icon>search</mat-icon>
+    Buscar
+  </button>
+
+  <button mat-stroked-button type="button" class="search-filter__action" (click)="onClear()">
+    <mat-icon>clear</mat-icon>
+    Limpiar
+  </button>
+</form>

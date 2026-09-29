@@ -1,0 +1,44 @@
+.customer-form {
+  max-width: 720px;
+  margin: 0 auto;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    mat-form-field {
+      flex: 1 1 260px;
+    }
+  }
+
+  &__date {
+    max-width: 320px;
+  }
+
+  &__error {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    background-color: #fdecea;
+    color: #c62828;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  &__spinner {
+    margin-right: 0.5rem;
+  }
+}

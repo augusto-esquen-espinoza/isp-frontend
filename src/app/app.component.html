@@ -1,0 +1,21 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-icon class="app-toolbar__logo" aria-hidden="true">groups</mat-icon>
+  <span class="app-toolbar__title">{{ title }}</span>
+
+  <span class="app-toolbar__spacer"></span>
+
+  <nav class="app-toolbar__nav" aria-label="Navegación principal">
+    <a mat-button routerLink="/customers" routerLinkActive="is-active">
+      <mat-icon>people</mat-icon>
+      Clientes
+    </a>
+    <a mat-button routerLink="/indicators" routerLinkActive="is-active">
+      <mat-icon>insights</mat-icon>
+      Indicadores
+    </a>
+  </nav>
+</mat-toolbar>
+
+<main class="app-content">
+  <router-outlet></router-outlet>
+</main>
